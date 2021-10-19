@@ -9,7 +9,7 @@ import java.util.*
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>() {
 
-    var dataList = ArrayList<Post>()
+    var dataList = ArrayList<Itemm>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
@@ -24,16 +24,16 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>() {
         return dataList.size
     }
 
-    fun addItem(post: Post) {
-        dataList.add(post)
+    fun addItem(Item:Itemm) {
+        dataList.add(Item)
     }
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView1: TextView
         private val textView2: TextView
-        fun onBind(post: Post) {
-            textView1.setText(post.title)
-            textView2.setText(post.body)
+        fun onBind(item: Itemm) {
+            textView1.setText(item.price)
+//            textView2.setText(yong.aop.aop.retrofitjsonkotlin.Item.body)
         }
 
         init {

@@ -11,9 +11,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.String
+
 
 class MainActivity : AppCompatActivity() {
+    var str1=""
     private var adapter: RecyclerAdapter? = null
     var i = 0
 
@@ -28,38 +29,42 @@ class MainActivity : AppCompatActivity() {
         adapter = RecyclerAdapter()
         recyclerView1.adapter = adapter
 
-
-//        getData();
         reto()
 
     }
 
     private fun reto() {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
+            .baseUrl("https://domeggook.com/ssl/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val retrofitAPI = retrofit.create(RetrofitAPI::class.java)
-        retrofitAPI.getData("1").enqueue(object : Callback<List<Post>> {
-            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+        retrofitAPI.getData().enqueue(object : Callback<yongi> {
+            override fun onResponse(call: Call<yongi>, response: Response<yongi>) {
                 if (response.isSuccessful) {
-                    var data= response.body() as MutableList<Post>
-                    for(i in i until data.size step 1){
-                        val post = Post()
-                        post.title=(String.valueOf(data[i].title))
-                        post.body=(String.valueOf(data[i].body))
-                        adapter!!.addItem(post)
-                        adapter!!.notifyDataSetChanged()
+                    Log.d("TEST", response.body().toString())
+//                    str1= response.body().toString()
+//                    str1 = str1.substring(0, str1.indexOf(" "))
+//                    Log.d("TEST", str1)
+//                    var data= response.body() as MutableList<yongi>
+////                                        for(i in i until data.size step 1){
+//                    itemm.price=
+//                        yong.title=(data[i].title)
+//                        yong.price=(String.valueOf(data[i].price))
+//                        adapter!!.addItem(item)
+//                        adapter!!.notifyDataSetChanged()
 //                        Log.d("TEST", data[i].getBody())
-                    }
+//                    }
+                }else{
+                    Log.d("TEST", "ddddddddddddzzzzzzzzzz" )
                 }
             }
 
-            override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-                t.printStackTrace()
+            override fun onFailure(call: Call<yongi>, t: Throwable) {
                 Log.d("TEST", "실패")
             }
+
         })
     }
 }
